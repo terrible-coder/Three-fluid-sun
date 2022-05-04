@@ -23,12 +23,14 @@ jobs:
       #     name: Installing packages
       #     command: pip3 install numpy scipy matplotlib
 
+      - run: python3 -m venv venv . venv/bin/activate pip3 install -r requirements.txt
+
       - run: python3 --version
 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
-            - ~/repo
+            - "venv"
 
       - persist_to_workspace:
           root: ~/repo
