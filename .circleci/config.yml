@@ -36,6 +36,7 @@ jobs:
           command: python3 helloworld.py
 
 workflows:
+  version: 2
   package:
     jobs:
       - install
