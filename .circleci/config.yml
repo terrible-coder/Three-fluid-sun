@@ -39,6 +39,13 @@ jobs:
           root: ~/repo
           paths: .
 
+  build:
+    <<: *defaults
+    steps:
+      - run:
+          name: Testing packages
+          command: python3 helloworld.py
+
   # lint:
   #   <<: *defaults
   #   steps:
