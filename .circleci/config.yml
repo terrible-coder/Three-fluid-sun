@@ -6,7 +6,6 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: cimg/python:3.8.10
-    - image: circleci/node:10.16.1
 
 jobs:
   build:
