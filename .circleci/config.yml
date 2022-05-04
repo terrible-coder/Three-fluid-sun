@@ -13,14 +13,20 @@ jobs:
     steps:
       - checkout
 
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+
       - python/install-packages:
           pkg-manager: pip
 
-      - run:
-          name: Installing packages
-          command: pip3 install numpy scipy matplotlib
+      # - run:
+      #     name: Installing packages
+      #     command: pip3 install numpy scipy matplotlib
 
       - run: python3 --version
+
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
 
       - persist_to_workspace:
           root: ~/repo
@@ -40,7 +46,9 @@ workflows:
   package:
     jobs:
       - install
-      - build
+      - build:
+          requires:
+            - install
 
   # lint:
   #   <<: *defaults
