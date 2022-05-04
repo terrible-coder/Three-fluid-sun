@@ -2,15 +2,14 @@ version: 2.1
 orbs:
   python: circleci/python@2.0.3
 
-# defaults: &defaults
-#   working_directory: ~/repo
-#   docker:
-#     - image: cimg/python:3.8.10
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: cimg/python:3.8.10
 
 jobs:
   install:
-    docker:
-      - image: cimg/python:3.8.10
+    <<: *defaults
     steps:
       - checkout
 
@@ -28,6 +27,7 @@ jobs:
           paths: .
 
   build:
+    <<: *defaults
     steps:
       - checkout
 
