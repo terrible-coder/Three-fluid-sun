@@ -23,7 +23,7 @@ jobs:
       #     name: Installing packages
       #     command: pip3 install numpy scipy matplotlib
 
-      - run: python3 -m venv venv . venv/bin/activate pip3 install -r requirements.txt
+      - run: python3 -m venv venv . venv/bin/activate pip3 install
 
       - run: python3 --version
 
