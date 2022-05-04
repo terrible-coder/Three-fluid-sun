@@ -8,7 +8,7 @@ defaults: &defaults
     - image: cimg/python:3.8.10
 
 jobs:
-  install:
+  build:
     <<: *defaults
     steps:
       - checkout
@@ -23,9 +23,11 @@ jobs:
       #     name: Installing packages
       #     command: pip3 install numpy scipy matplotlib
 
-      - run: python3 -m venv venv . venv/bin/activate pip3 install
-
       - run: python3 --version
+
+      - run:
+          name: Hello World
+          command: python3 helloworld.py
 
       - save_cache:
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
@@ -36,23 +38,20 @@ jobs:
           root: ~/repo
           paths: .
 
-  build:
-    <<: *defaults
-    steps:
-      - checkout
+  # build:
+  #   <<: *defaults
+  #   steps:
+  #     - checkout
 
-      - run:
-          name: Testing packages
-          command: python3 helloworld.py
+  #     - run:
+  #         name: Testing packages
+  #         command: python3 helloworld.py
 
 workflows:
   version: 2
   package:
     jobs:
-      - install
-      - build:
-          requires:
-            - install
+      - build
 
   # lint:
   #   <<: *defaults
